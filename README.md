@@ -5,519 +5,591 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>देश और विदेश का विशेष न्यूज</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Hind Siliguri', 'Nirmala UI', Arial, sans-serif;
         }
         
         :root {
-            --primary-color: #e63946;
-            --secondary-color: #1d3557;
-            --accent-color: #a8dadc;
-            --light-color: #f1faee;
-            --dark-color: #1d3557;
+            --primary: #c62828;
+            --primary-dark: #8e0000;
+            --secondary: #1a237e;
+            --accent: #ff6f00;
+            --light: #f5f5f5;
+            --dark: #212121;
+            --gray: #757575;
+            --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
         }
         
         body {
-            background-color: #f5f5f5;
-            color: #333;
+            background-color: #f0f2f5;
+            color: var(--dark);
             line-height: 1.6;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
         }
         
         /* Header Styles */
         header {
-            background: linear-gradient(135deg, var(--secondary-color), var(--dark-color));
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
-            padding: 15px 0;
+            padding: 1rem 0;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
         
-        .header-top {
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            padding: 0 2rem;
+            flex-wrap: wrap;
         }
         
         .logo {
             display: flex;
             align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: #ffeb3b;
         }
         
         .logo h1 {
             font-size: 1.8rem;
-            margin-left: 10px;
-        }
-        
-        .logo-icon {
-            font-size: 2.5rem;
-            color: var(--primary-color);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
         
         .date-display {
-            font-size: 1.1rem;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px 15px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 15px;
             border-radius: 20px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        nav ul {
+        .nav-links {
             display: flex;
             list-style: none;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
-            padding: 5px;
+            gap: 15px;
+            flex-wrap: wrap;
         }
         
-        nav ul li {
-            margin: 0 5px;
-        }
-        
-        nav ul li a {
+        .nav-links a {
             color: white;
             text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 5px;
             font-weight: 500;
-            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background 0.3s;
+            font-size: 1.1rem;
         }
         
-        nav ul li a:hover, 
-        nav ul li a.active {
-            background: var(--primary-color);
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-links a.active {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Breaking News */
+        .breaking-news {
+            background: var(--accent);
+            color: white;
+            padding: 12px 0;
+            position: sticky;
+            top: 80px;
+            z-index: 90;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        .breaking-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .breaking-tag {
+            background: #d32f2f;
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 20px;
+            white-space: nowrap;
+        }
+        
+        .breaking-content {
+            flex-grow: 1;
+            overflow: hidden;
+            position: relative;
+            height: 30px;
+        }
+        
+        .breaking-text {
+            position: absolute;
+            white-space: nowrap;
+            animation: scrollText 25s linear infinite;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(29, 53, 87, 0.8), rgba(29, 53, 87, 0.9)), url('https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 80px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?ixlib=rb-4.0.3') center/cover;
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            margin-bottom: 40px;
+            color: white;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            z-index: 2;
         }
         
         .hero h2 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 3.2rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+            line-height: 1.2;
         }
         
         .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 30px;
+            font-size: 1.3rem;
+            margin-bottom: 1.8rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
         
-        .search-box {
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .search-box input {
-            width: 100%;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .search-box button {
-            position: absolute;
-            right: 5px;
-            top: 5px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 10px 25px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .search-box button:hover {
-            background: #c1121f;
-        }
-        
-        /* News Section */
-        .section-title {
-            text-align: center;
-            margin: 40px 0 30px;
-            position: relative;
-            color: var(--secondary-color);
-        }
-        
-        .section-title::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--primary-color);
-            border-radius: 2px;
-        }
-        
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-        
-        .news-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .news-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .card-image {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .news-card:hover .card-image img {
-            transform: scale(1.05);
-        }
-        
-        .card-content {
-            padding: 20px;
-        }
-        
-        .news-category {
+        .btn {
             display: inline-block;
-            background: var(--primary-color);
+            background: var(--primary);
             color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-bottom: 12px;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         
-        .card-content h3 {
-            font-size: 1.4rem;
-            margin-bottom: 12px;
-            color: var(--dark-color);
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
         }
         
-        .card-content p {
-            color: #666;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
+        .btn i {
+            margin-right: 8px;
         }
         
-        .news-meta {
+        .auto-update {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 30px;
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin: 2.5rem 0 1.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 4px solid var(--primary);
+            display: inline-block;
+            font-weight: 700;
+        }
+        
+        .full-news-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: 30px;
+            margin-bottom: 3rem;
+        }
+        
+        .full-news-article {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+        
+        .full-news-article:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .article-header {
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            color: white;
+            padding: 1.3rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .article-content {
+            padding: 2rem;
+        }
+        
+        .article-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+        
+        .article-meta {
             display: flex;
             justify-content: space-between;
-            color: #888;
-            font-size: 0.9rem;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-        }
-        
-        /* Video Section */
-        .video-section {
-            background: var(--light-color);
-            padding: 50px 0;
-            margin: 40px 0;
-        }
-        
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
-        }
-        
-        .video-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .video-thumbnail {
-            position: relative;
-            height: 200px;
-        }
-        
-        .video-thumbnail img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .play-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            background: rgba(230, 57, 70, 0.8);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
             align-items: center;
-            font-size: 1.5rem;
-            cursor: pointer;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            flex-wrap: wrap;
+            gap: 15px;
         }
         
-        .video-info {
+        .article-date {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .article-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray);
+        }
+        
+        .article-category {
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        
+        .article-image {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+        }
+        
+        .article-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+        
+        .article-text p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-text h3 {
+            color: var(--secondary);
+            margin: 1.8rem 0 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+        
+        .article-tag {
+            background: #e3f2fd;
+            color: var(--secondary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* Ad Space */
+        .ad-space {
+            background: #f9f9f9;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+            color: var(--gray);
+            text-align: center;
             padding: 20px;
         }
         
-        .video-info h3 {
+        .ad-space i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .ad-space h3 {
+            font-size: 1.5rem;
             margin-bottom: 10px;
-            color: var(--dark-color);
         }
         
         /* Contact Section */
         .contact-section {
-            background: linear-gradient(135deg, var(--secondary-color), var(--dark-color));
-            color: white;
-            padding: 60px 0;
-            margin-top: 50px;
-        }
-        
-        .contact-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: var(--card-shadow);
+            margin-top: 2rem;
         }
         
         .contact-info {
-            flex: 1;
-            min-width: 300px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 1.8rem;
         }
         
-        .contact-info h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 15px;
-        }
-        
-        .contact-info h2::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 80px;
-            height: 4px;
-            background: var(--primary-color);
-        }
-        
-        .contact-details {
-            margin-top: 30px;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 20px;
-        }
-        
-        .contact-icon {
-            font-size: 1.3rem;
-            color: var(--accent-color);
-            margin-right: 15px;
-            margin-top: 5px;
-        }
-        
-        .contact-form {
-            flex: 1;
-            min-width: 300px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
+        .contact-card {
+            background: #f5f7ff;
             border-radius: 10px;
+            padding: 1.8rem;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
         }
         
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: none;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.9);
-            font-size: 1rem;
-        }
-        
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        .submit-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        
-        .submit-btn:hover {
-            background: #c1121f;
-        }
-        
-        /* Footer */
-        footer {
-            background: #1a1a2e;
-            color: #ccc;
-            padding: 40px 0 20px;
-        }
-        
-        .footer-content {
+        .contact-card h3 {
+            color: var(--secondary);
+            margin-bottom: 1.2rem;
+            font-size: 1.5rem;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 40px;
-            margin-bottom: 30px;
+            align-items: center;
+            gap: 10px;
         }
         
-        .footer-column {
-            flex: 1;
-            min-width: 200px;
+        .contact-card p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
         }
         
-        .footer-column h3 {
-            color: white;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
+        .contact-card i {
+            color: var(--primary);
+            width: 24px;
+            text-align: center;
+            font-size: 1.2rem;
         }
         
-        .footer-column h3::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background: var(--primary-color);
-        }
-        
-        .footer-column ul {
-            list-style: none;
-        }
-        
-        .footer-column ul li {
-            margin-bottom: 12px;
-        }
-        
-        .footer-column ul li a {
-            color: #aaa;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-column ul li a:hover {
-            color: var(--accent-color);
-        }
-        
-        .social-icons {
+        .social-links {
             display: flex;
             gap: 15px;
             margin-top: 20px;
         }
         
-        .social-icon {
+        .social-links a {
             display: flex;
-            justify-content: center;
             align-items: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: var(--secondary);
             color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            transition: var(--transition);
         }
         
-        .social-icon:hover {
-            background: var(--primary-color);
-            transform: translateY(-5px);
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .footer-logo h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            color: #ffeb3b;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .footer-logo p {
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        
+        .footer-links h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1.3rem;
+            color: #ffeb3b;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--primary);
+            display: inline-block;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.9rem;
+        }
+        
+        .footer-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-links a:hover {
+            color: #ffeb3b;
+        }
+        
+        .footer-links a i {
+            width: 20px;
         }
         
         .copyright {
             text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid #424242;
+            color: #bdbdbd;
+            font-size: 1.05rem;
         }
         
         /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.6rem;
+            }
+            
+            .full-news-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
         @media (max-width: 768px) {
-            .header-top {
+            .header-container {
                 flex-direction: column;
-                text-align: center;
+                gap: 15px;
             }
             
-            .date-display {
-                margin-top: 10px;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
+            .nav-links {
                 justify-content: center;
             }
             
             .hero {
-                padding: 50px 0;
+                height: 400px;
             }
             
             .hero h2 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .breaking-container {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .breaking-tag {
+                margin-right: 0;
+            }
+            
+            .breaking-content {
+                height: auto;
+            }
+            
+            .breaking-text {
+                position: static;
+                animation: none;
+                white-space: normal;
             }
         }
         
         @media (max-width: 480px) {
-            .logo h1 {
-                font-size: 1.5rem;
+            .hero {
+                height: 350px;
             }
             
             .hero h2 {
@@ -525,130 +597,478 @@
             }
             
             .section-title {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
+            }
+            
+            .article-header {
+                font-size: 1.3rem;
+            }
+            
+            .article-title {
+                font-size: 1.5rem;
+            }
+            
+            .contact-section {
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header Section -->
+    <!-- Header -->
     <header>
-        <div class="container">
-            <div class="header-top">
-                <div class="logo">
-                    <i class="fas fa-globe-asia logo-icon"></i>
-                    <h1>देश और विदेश का विशेष न्यूज</h1>
-                </div>
-                <div class="date-display">
-                    <i class="fas fa-calendar-alt"></i> 8 जुलाई 2025, मंगलवार
-                </div>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-newspaper"></i>
+                <h1>देश और विदेश का विशेष न्यूज</h1>
             </div>
             
-            <nav>
-                <ul>
-                    <li><a href="#" class="active">होम</a></li>
-                    <li><a href="#">राजनीति</a></li>
-                    <li><a href="#">व्यापार</a></li>
-                    <li><a href="#">खेल</a></li>
-                    <li><a href="#">मनोरंजन</a></li>
-                    <li><a href="#">विज्ञान</a></li>
-                    <li><a href="#">स्वास्थ्य</a></li>
-                    <li><a href="#">वीडियो</a></li>
-                </ul>
-            </nav>
+            <div class="date-display">
+                <i class="fas fa-calendar-alt"></i>
+                <span id="current-date">13 जुलाई 2025, रविवार</span>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="#" class="active">होम</a></li>
+                <li><a href="#politics">राजनीति</a></li>
+                <li><a href="#sports">खेल</a></li>
+                <li><a href="#entertainment">मनोरंजन</a></li>
+                <li><a href="#business">व्यापार</a></li>
+                <li><a href="#technology">तकनीक</a></li>
+                <li><a href="#contact">संपर्क</a></li>
+            </ul>
         </div>
     </header>
-
+    
+    <!-- Breaking News -->
+    <div class="breaking-news">
+        <div class="breaking-container">
+            <div class="breaking-tag">
+                <i class="fas fa-bolt"></i> ब्रेकिंग न्यूज
+            </div>
+            <div class="breaking-content">
+                <div class="breaking-text">
+                    भारत ने विश्व कप क्रिकेट जीता! विराट कोहली ने शतक बनाकर देश को गौरवान्वित किया। पूरा देश जश्न में डूबा हुआ है। देखें विशेष रिपोर्ट।
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
-            <h2>विश्व भर से ताज़ा खबरें</h2>
-            <p>देश और विदेश की सबसे विश्वसनीय और तेज खबरें, विश्लेषण और अपडेट्स। हमारे ऑटोमेटेड सिस्टम द्वारा 24/7 अपडेटेड</p>
-            
-            <div class="search-box">
-                <input type="text" placeholder="खोजें...">
-                <button><i class="fas fa-search"></i> खोजें</button>
+        <div class="hero-content">
+            <h2>विश्वसनीय और ताज़ा खबरें</h2>
+            <p>देश और दुनिया की सभी महत्वपूर्ण खबरें हिंदी में। विभिन्न भाषाओं के समाचारों का स्वचालित अनुवाद।</p>
+            <a href="#news" class="btn"><i class="fas fa-newspaper"></i> ताज़ा खबरें पढ़ें</a>
+            <div class="auto-update">
+                <i class="fas fa-sync-alt"></i> यह वेबसाइट प्रतिदिन स्वचालित रूप से अपडेट होती है
             </div>
         </div>
     </section>
-
+    
     <!-- Main Content -->
-    <div class="container">
-        <h2 class="section-title">ताज़ा खबरें</h2>
+    <main class="container">
+        <h2 class="section-title" id="news">आज की ताज़ा खबरें <small>(13 जुलाई 2025)</small></h2>
         
-        <div class="news-grid">
-            <!-- News Card 1 -->
-            <div class="news-card">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="News Image">
+        <!-- Ad Space -->
+        <div class="ad-space">
+            <i class="fas fa-ad"></i>
+            <h3>विज्ञापन स्थान</h3>
+            <p>यहाँ आपका विज्ञापन प्रदर्शित किया जाएगा</p>
+        </div>
+        
+        <!-- राजनीति -->
+        <div class="full-news-article" id="politics">
+            <div class="article-header">
+                <i class="fas fa-landmark"></i> राजनीति
+            </div>
+            <div class="article-content">
+                <h2 class="article-title">केंद्रीय मंत्रिमंडल ने नई शिक्षा नीति को मंजूरी दी</h2>
+                
+                <div class="article-meta">
+                    <div class="article-date">
+                        <i class="far fa-calendar"></i> 13 जुलाई 2025
+                    </div>
+                    <div class="article-author">
+                        <i class="fas fa-user-edit"></i> रिपोर्टर: राहुल शर्मा
+                    </div>
+                    <div class="article-category">
+                        <i class="fas fa-tag"></i> शिक्षा नीति
+                    </div>
                 </div>
-                <div class="card-content">
-                    <span class="news-category">राजनीति</span>
-                    <h3>केंद्र सरकार ने घोषित की नई शिक्षा नीति, 2025 से लागू होगी</h3>
-                    <p>मानव संसाधन विकास मंत्रालय ने आज नई शिक्षा नीति की घोषणा की जिसमें कई बड़े बदलाव शामिल हैं। नई नीति में विद्यार्थियों के सर्वांगीण विकास पर जोर दिया गया है...</p>
-                    <div class="news-meta">
-                        <span><i class="far fa-clock"></i> 2 घंटे पहले</span>
-                        <span><i class="far fa-eye"></i> 1.2k</span>
+                
+                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Education Policy" class="article-image">
+                
+                <div class="article-text">
+                    <p>केंद्र सरकार ने आज नई शिक्षा नीति को मंजूरी दे दी है जिसमें 10+2 प्रणाली को खत्म कर 5+3+3+4 प्रणाली लागू की जाएगी। इस नई नीति का उद्देश्य शिक्षा प्रणाली को और अधिक समावेशी, लचीला और भविष्योन्मुखी बनाना है।</p>
+                    
+                    <h3>मुख्य बदलाव</h3>
+                    <p>नई शिक्षा नीति में कई महत्वपूर्ण बदलाव किए गए हैं:</p>
+                    <p>1. शिक्षा संरचना: 10+2 प्रणाली को बदलकर 5+3+3+4 प्रणाली लागू की जाएगी। इसके तहत पहले पाँच वर्ष फाउंडेशन स्टेज (3 साल प्री-स्कूल + कक्षा 1-2), अगले तीन वर्ष प्रिपरेटरी स्टेज (कक्षा 3-5), फिर तीन वर्ष मिडिल स्टेज (कक्षा 6-8) और अंत में चार वर्ष सेकेंडरी स्टेज (कक्षा 9-12) शामिल होंगे।</p>
+                    <p>2. बोर्ड परीक्षाएँ: कक्षा 10 और 12 की बोर्ड परीक्षाएँ आसान बनाई जाएंगी और वर्ष में दो बार आयोजित होंगी। छात्रों को अपना विषय चुनने की अधिक स्वतंत्रता दी जाएगी।</p>
+                    <p>3. उच्च शिक्षा: ग्रेजुएशन कोर्स 3 या 4 साल का होगा। छात्र एकेडमिक क्रेडिट बैंक के माध्यम से अपनी पढ़ाई को ब्रेक के बाद भी जारी रख सकेंगे।</p>
+                    
+                    <h3>भाषा नीति</h3>
+                    <p>नई नीति में कक्षा 5 तक मातृभाषा या क्षेत्रीय भाषा में शिक्षा पर जोर दिया गया है। कक्षा 6 से विदेशी भाषाओं को विकल्प के रूप में शामिल किया जाएगा।</p>
+                    
+                    <h3>शिक्षक प्रशिक्षण</h3>
+                    <p>सभी शिक्षकों के लिए 2025 तक न्यूनतम 4 वर्षीय एकीकृत बी.एड डिग्री अनिवार्य की जाएगी। शिक्षकों के लिए नियमित प्रशिक्षण कार्यक्रम आयोजित किए जाएंगे।</p>
+                    
+                    <p>मानव संसाधन विकास मंत्री ने कहा, "यह नीति भारत को ज्ञान आधारित महाशक्ति बनाने की दिशा में एक महत्वपूर्ण कदम है। हमारा लक्ष्य है कि 2030 तक स्कूली शिक्षा में 100% सकल नामांकन अनुपात प्राप्त किया जाए।"</p>
+                    
+                    <p>नई नीति को लागू करने के लिए सरकार शिक्षा बजट को जीडीपी के 6% तक बढ़ाने का प्रस्ताव रखती है। राज्य सरकारों के साथ परामर्श के बाद इस नीति को चरणबद्ध तरीके से पूरे देश में लागू किया जाएगा।</p>
+                </div>
+                
+                <div class="article-tags">
+                    <span class="article-tag">शिक्षा नीति</span>
+                    <span class="article-tag">केंद्र सरकार</span>
+                    <span class="article-tag">शिक्षा सुधार</span>
+                    <span class="article-tag">5+3+3+4 प्रणाली</span>
+                    <span class="article-tag">शिक्षा बजट</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- खेल -->
+        <div class="full-news-article" id="sports">
+            <div class="article-header">
+                <i class="fas fa-football-ball"></i> खेल
+            </div>
+            <div class="article-content">
+                <h2 class="article-title">भारत ने विश्व कप क्रिकेट जीता</h2>
+                
+                <div class="article-meta">
+                    <div class="article-date">
+                        <i class="far fa-calendar"></i> 13 जुलाई 2025
+                    </div>
+                    <div class="article-author">
+                        <i class="fas fa-user-edit"></i> रिपोर्टर: राजीव मेहता
+                    </div>
+                    <div class="article-category">
+                        <i class="fas fa-tag"></i> क्रिकेट
+                    </div>
+                </div>
+                
+                <img src="https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Cricket World Cup" class="article-image">
+                
+                <div class="article-text">
+                    <p>भारतीय क्रिकेट टीम ने आज फाइनल मैच में ऑस्ट्रेलिया को 35 रनों से हराकर विश्व कप पर कब्जा जमाया। यह भारत का छठा विश्व कप खिताब है और 2011 के बाद पहली बार भारत ने यह ट्रॉफी जीती है।</p>
+                    
+                    <h3>मैच सारांश</h3>
+                    <p>टॉस जीतकर पहले बल्लेबाजी करते हुए भारत ने 50 ओवर में 8 विकेट के नुकसान पर 325 रन बनाए। विराट कोहली ने शानदार 112 रनों की पारी खेली जिसमें 10 चौके और 2 छक्के शामिल थे। कप्तान रोहित शर्मा ने भी 78 रनों की तूफानी पारी खेली।</p>
+                    
+                    <p>जवाब में ऑस्ट्रेलिया की टीम महज 47.3 ओवर में 290 रन बनाकर ऑल आउट हो गई। जसप्रीत बुमराह ने 4 विकेट लिए जबकि कुलदीप यादव ने 3 विकेट चटकाए। डेविड वॉर्नर ने ऑस्ट्रेलिया की तरफ से 85 रन बनाए लेकिन वे टीम को जीत नहीं दिला सके।</p>
+                    
+                    <h3>कोहली का शतक</h3>
+                    <p>विराट कोहली ने अपने करियर का 75वां अंतरराष्ट्रीय शतक जड़कर इतिहास रच दिया। यह विश्व कप फाइनल में उनका पहला शतक था। कोहली को मैन ऑफ द मैच चुना गया।</p>
+                    
+                    <p>मैच के बाद भावुक कोहली ने कहा, "यह मेरे करियर का सबसे यादगार पल है। टीम ने शानदार प्रदर्शन किया और हमने 12 साल बाद विश्व कप जीता। मैं सभी भारतीय प्रशंसकों को यह जीत समर्पित करता हूँ।"</p>
+                    
+                    <h3>जश्न का माहौल</h3>
+                    <p>जीत की खबर मिलते ही पूरे देश में जश्न का माहौल है। प्रधानमंत्री ने टीम को बधाई देते हुए कहा कि उन्होंने देश का सिर गर्व से ऊँचा कर दिया है। टीम भारत कल दोपहर दिल्ली पहुँचेगी जहाँ उनका भव्य स्वागत किया जाएगा।</p>
+                    
+                    <p>क्रिकेट विश्लेषक हर्षा भोगले ने कहा, "यह भारतीय क्रिकेट के इतिहास का सबसे महत्वपूर्ण क्षणों में से एक है। टीम ने पूरे टूर्नामेंट में शानदार प्रदर्शन किया और फाइनल में उनकी जीत पूरी तरह से योग्य थी।"</p>
+                </div>
+                
+                <div class="article-tags">
+                    <span class="article-tag">क्रिकेट विश्व कप</span>
+                    <span class="article-tag">भारत बनाम ऑस्ट्रेलिया</span>
+                    <span class="article-tag">विराट कोहली</span>
+                    <span class="article-tag">जसप्रीत बुमराह</span>
+                    <span class="article-tag">रोहित शर्मा</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- मनोरंजन -->
+        <div class="full-news-article" id="entertainment">
+            <div class="article-header">
+                <i class="fas fa-film"></i> मनोरंजन
+            </div>
+            <div class="article-content">
+                <h2 class="article-title">'अशोक' फिल्म ने बॉक्स ऑफिस पर रचा इतिहास</h2>
+                
+                <div class="article-meta">
+                    <div class="article-date">
+                        <i class="far fa-calendar"></i> 13 जुलाई 2025
+                    </div>
+                    <div class="article-author">
+                        <i class="fas fa-user-edit"></i> रिपोर्टर: प्रिया मल्होत्रा
+                    </div>
+                    <div class="article-category">
+                        <i class="fas fa-tag"></i> बॉलीवुड
+                    </div>
+                </div>
+                
+                <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Ashok Movie" class="article-image">
+                
+                <div class="article-text">
+                    <p>राजकुमार राव और भूमि पेडनेकर अभिनीत फिल्म 'अशोक' ने बॉक्स ऑफिस पर नया रिकॉर्ड बनाया है। फिल्म ने अपने पहले सप्ताह में ही 200 करोड़ का कारोबार किया है जो हिंदी सिनेमा के इतिहास में सबसे तेज है।</p>
+                    
+                    <h3>कहानी और प्रदर्शन</h3>
+                    <p>फिल्म महान मौर्य सम्राट अशोक के जीवन पर आधारित है। राजकुमार राव ने अशोक की भूमिका में शानदार अभिनय किया है जबकि भूमि पेडनेकर ने उनकी पत्नी देवी की भूमिका निभाई है।</p>
+                    
+                    <p>निर्देशक संजय लीला भंसाली ने फिल्म को भव्य पैमाने पर बनाया है। युद्ध के दृश्यों और सेट डिजाइन के लिए फिल्म की खास तारीफ हो रही है। फिल्म में 20 मिनट के कलिंग युद्ध के दृश्य को विशेष रूप से प्रशंसा मिली है जिसे 2000 एक्स्ट्रा और 200 घोड़ों के साथ फिल्माया गया था।</p>
+                    
+                    <h3>दर्शकों और आलोचकों की प्रतिक्रिया</h3>
+                    <p>फिल्म को दर्शकों और आलोचकों दोनों से सराहना मिल रही है। ट्विटर पर #AshokTheGreat ट्रेंड कर रहा है। दर्शक फिल्म के संवाद, संगीत और राजकुमार राव के अभिनय की तारीफ कर रहे हैं।</p>
+                    
+                    <p>प्रसिद्ध फिल्म आलोचक तरण आदर्श ने कहा, "राजकुमार राव ने अशोक की भूमिका में जान डाल दी है। यह उनके करियर की अब तक की सर्वश्रेष्ठ अभिनय प्रस्तुति है। भंसाली ने एक बार फिर साबित कर दिया कि वे ऐतिहासिक महाकाव्य फिल्मों के बादशाह हैं।"</p>
+                    
+                    <h3>वैश्विक सफलता</h3>
+                    <p>फिल्म ने विदेशी बाजारों में भी शानदार प्रदर्शन किया है। अमेरिका, ब्रिटेन और ऑस्ट्रेलिया में यह हिंदी फिल्मों के लिए सबसे ज्यादा कमाई करने वाली फिल्म बन गई है।</p>
+                    
+                    <p>निर्माता ने बताया कि फिल्म के दूसरे भाग पर काम शुरू हो चुका है जो अशोक के कलिंग युद्ध के बाद के जीवन पर केंद्रित होगी। राजकुमार राव और भूमि पेडनेकर इस सीक्वल में भी मुख्य भूमिका निभाएंगे।</p>
+                </div>
+                
+                <div class="article-tags">
+                    <span class="article-tag">बॉलीवुड</span>
+                    <span class="article-tag">राजकुमार राव</span>
+                    <span class="article-tag">भूमि पेडनेकर</span>
+                    <span class="article-tag">ऐतिहासिक फिल्म</span>
+                    <span class="article-tag">बॉक्स ऑफिस</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Ad Space -->
+        <div class="ad-space">
+            <i class="fas fa-ad"></i>
+            <h3>विज्ञापन स्थान</h3>
+            <p>यहाँ आपका विज्ञापन प्रदर्शित किया जाएगा</p>
+        </div>
+        
+        <!-- व्यापार -->
+        <div class="full-news-article" id="business">
+            <div class="article-header">
+                <i class="fas fa-chart-line"></i> व्यापार
+            </div>
+            <div class="article-content">
+                <h2 class="article-title">सेंसेक्स 60,000 के ऐतिहासिक स्तर पर पहुँचा</h2>
+                
+                <div class="article-meta">
+                    <div class="article-date">
+                        <i class="far fa-calendar"></i> 13 जुलाई 2025
+                    </div>
+                    <div class="article-author">
+                        <i class="fas fa-user-edit"></i> रिपोर्टर: अमित जैन
+                    </div>
+                    <div class="article-category">
+                        <i class="fas fa-tag"></i> शेयर बाजार
+                    </div>
+                </div>
+                
+                <img src="https://images.unsplash.com/photo-1468254095679-bbcba94a7066?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Stock Market" class="article-image">
+                
+                <div class="article-text">
+                    <p>भारतीय शेयर बाजार ने आज ऐतिहासिक उपलब्धि हासिल की है। बॉम्बे स्टॉक एक्सचेंज का सेंसेक्स पहली बार 60,000 अंक के पार बंद हुआ है। यह उपलब्धि विदेशी निवेशकों के बढ़ते निवेश और मजबूत आर्थिक संकेतकों के बीच हासिल हुई है।</p>
+                    
+                    <h3>बाजार का प्रदर्शन</h3>
+                    <p>सेंसेक्स आज 872 अंकों की तेजी के साथ 60,125 अंक पर बंद हुआ, जबकि निफ्टी 18,350 के नए रिकॉर्ड स्तर पर पहुँच गया। बैंकिंग और आईटी शेयरों में सबसे ज्यादा तेजी देखी गई।</p>
+                    
+                    <p>विश्लेषकों के अनुसार, यह उछाल कई कारकों की वजह से आया है:</p>
+                    <p>1. भारत की जीडीपी विकास दर पिछली तिमाही में 8.2% रही, जो अनुमान से अधिक है</p>
+                    <p>2. विदेशी पोर्टफोलियो निवेशकों (एफपीआई) ने इस महीने अब तक 15,000 करोड़ रुपये से अधिक का निवेश किया है</p>
+                    <p>3. वैश्विक तेल कीमतों में गिरावट से मुद्रास्फीति पर दबाव कम हुआ है</p>
+                    
+                    <h3>विशेषज्ञों की राय</h3>
+                    <p>शेयर बाजार विशेषज्ञ राकेश झुनझुनवाला ने कहा, "यह भारतीय अर्थव्यवस्था की मजबूती का प्रतीक है। हम एक बुल मार्केट के शुरुआती चरण में हैं और अगले 2-3 साल में बाजार और ऊपर जा सकता है।"</p>
+                    
+                    <p>हालाँकि, कुछ विश्लेषकों ने निवेशकों को सतर्क रहने की सलाह दी है। कोटक सिक्योरिटीज के प्रमुख ने कहा, "बाजार वर्तमान में ओवरवैल्यूड हो सकता है। निवेशकों को सावधानी बरतनी चाहिए और मौलिक रूप से मजबूत कंपनियों में निवेश करना चाहिए।"</p>
+                    
+                    <h3>भविष्य की संभावनाएँ</h3>
+                    <p>अधिकांश विश्लेषकों का मानना है कि भारतीय अर्थव्यवस्था के मजबूत होने के कारण बाजार में तेजी जारी रह सकती है। विदेशी निवेशकों का भारत में बढ़ता विश्वास और घरेलू निवेशकों की बढ़ती भागीदारी बाजार के लिए सकारात्मक संकेत हैं।</p>
+                </div>
+                
+                <div class="article-tags">
+                    <span class="article-tag">शेयर बाजार</span>
+                    <span class="article-tag">सेंसेक्स</span>
+                    <span class="article-tag">निफ्टी</span>
+                    <span class="article-tag">बीएसई</span>
+                    <span class="article-tag">निवेश</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- तकनीक -->
+        <div class="full-news-article" id="technology">
+            <div class="article-header">
+                <i class="fas fa-microchip"></i> तकनीक
+            </div>
+            <div class="article-content">
+                <h2 class="article-title">भारत में बना दुनिया का सबसे सस्ता स्मार्टफोन</h2>
+                
+                <div class="article-meta">
+                    <div class="article-date">
+                        <i class="far fa-calendar"></i> 13 जुलाई 2025
+                    </div>
+                    <div class="article-author">
+                        <i class="fas fa-user-edit"></i> रिपोर्टर: नीरज पटेल
+                    </div>
+                    <div class="article-category">
+                        <i class="fas fa-tag"></i> स्मार्टफोन
+                    </div>
+                </div>
+                
+                <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Smartphone" class="article-image">
+                
+                <div class="article-text">
+                    <p>भारतीय कंपनी जियो ने दुनिया का सबसे सस्ता 5G स्मार्टफोन लॉन्च किया है जिसकी कीमत सिर्फ 4,999 रुपये है। इस फोन में 6.5 इंच का एचडी+ डिस्प्ले, 5000mAh बैटरी और ट्रिपल कैमरा सेटअप है।</p>
+                    
+                    <h3>फोन की विशेषताएँ</h3>
+                    <p>जियो ने अपने नए स्मार्टफोन में कई उन्नत विशेषताएँ दी हैं:</p>
+                    <p>1. प्रोसेसर: मीडियाटेक डाइमेंसिटी 6100+ चिपसेट</p>
+                    <p>2. रैम और स्टोरेज: 4GB रैम + 64GB स्टोरेज (माइक्रोएसडी कार्ड सपोर्ट के साथ)</p>
+                    <p>3. कैमरा: 50MP प्राइमरी कैमरा, 8MP अल्ट्रावाइड और 2MP मैक्रो लेंस</p>
+                    <p>4. बैटरी: 5000mAh जो 18W फास्ट चार्जिंग को सपोर्ट करती है</p>
+                    <p>5. ऑपरेटिंग सिस्टम: एंड्रॉयड 15</p>
+                    
+                    <h3>डिजिटल इंडिया को बढ़ावा</h3>
+                    <p>इस फोन को भारत सरकार के 'डिजिटल इंडिया' पहल के तहत विकसित किया गया है। कंपनी के प्रवक्ता ने कहा, "हमारा लक्ष्य हर भारतीय को सस्ती दरों पर 5G तकनीक उपलब्ध कराना है। यह फोन ग्रामीण और शहरी दोनों क्षेत्रों के उपभोक्ताओं के लिए उपयुक्त है।"</p>
+                    
+                    <p>केंद्रीय इलेक्ट्रॉनिक्स मंत्री ने इस फोन के लॉन्च पर बधाई देते हुए कहा, "यह 'मेक इन इंडिया' पहल की एक बड़ी सफलता है। इससे डिजिटल विभाजन को कम करने में मदद मिलेगी और देश के हर नागरिक तक डिजिटल सुविधाएँ पहुँच सकेंगी।"</p>
+                    
+                    <h3>बाजार में प्रभाव</h3>
+                    <p>विश्लेषकों का मानना है कि यह फोन भारतीय स्मार्टफोन बाजार में क्रांति ला सकता है। इसकी कीमत और विशेषताओं के कारण यह चीनी कंपनियों के फोनों के लिए कड़ी टक्कर साबित होगा।</p>
+                    
+                    <p>फोन की बुकिंग आज से शुरू हो गई है और पहले दिन ही 10 लाख से अधिक यूनिट बुक हो चुकी हैं। फोन की डिलीवरी अगले सप्ताह से शुरू होगी।</p>
+                </div>
+                
+                <div class="article-tags">
+                    <span class="article-tag">स्मार्टफोन</span>
+                    <span class="article-tag">5G</span>
+                    <span class="article-tag">जियो</span>
+                    <span class="article-tag">मेक इन इंडिया</span>
+                    <span class="article-tag">डिजिटल इंडिया</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Ad Space -->
+        <div class="ad-space">
+            <i class="fas fa-ad"></i>
+            <h3>विज्ञापन स्थान</h3>
+            <p>यहाँ आपका विज्ञापन प्रदर्शित किया जाएगा</p>
+        </div>
+        
+        <!-- Contact Section -->
+        <h2 class="section-title" id="contact">हमसे संपर्क करें</h2>
+        <div class="contact-section">
+            <p>आप हमसे नीचे दिए गए विवरणों के माध्यम से संपर्क कर सकते हैं। किसी भी प्रश्न, सुझाव या शिकायत के लिए बेझिझक संपर्क करें।</p>
+            
+            <div class="contact-info">
+                <div class="contact-card">
+                    <h3><i class="fas fa-address-card"></i> संपर्क जानकारी</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> गरिकालन, बरकागांव, झारखंड - 825311</p>
+                    <p><i class="fas fa-phone"></i> 9693468752</p>
+                    <p><i class="fas fa-envelope"></i> contact@deshvideshnews.com</p>
+                    <p><i class="fas fa-clock"></i> सोम-शनि: 9:00 AM - 6:00 PM</p>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <h3><i class="fas fa-info-circle"></i> Kimi Online Center</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> गरिकालन, बरकागांव, झारखंड</p>
+                    <p><i class="fas fa-phone"></i> 9693468752</p>
+                    <p><i class="fas fa-envelope"></i> kimi.center@example.com</p>
+                    <p><i class="fas fa-globe"></i> www.kimionlinecenter.com</p>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
                     </div>
                 </div>
             </div>
-            
-            <!-- News Card 2 -->
-            <div class="news-card">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1173&q=80" alt="News Image">
-                </div>
-                <div class="card-content">
-                    <span class="news-category">विज्ञान</span>
-                    <h3>भारतीय वैज्ञानिकों ने खोजा कैंसर का नया इलाज, सफलता दर 90%</h3>
-                    <p>टाटा मेमोरियल अस्पताल के शोधकर्ताओं ने एक ऐसी थेरेपी विकसित की है जो कैंसर सेल्स को खत्म करने में अत्यधिक प्रभावी साबित हुई है। यह खोज विश्वभर में सुर्खियों में है...</p>
-                    <div class="news-meta">
-                        <span><i class="far fa-clock"></i> 4 घंटे पहले</span>
-                        <span><i class="far fa-eye"></i> 2.4k</span>
-                    </div>
-                </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3><i class="fas fa-newspaper"></i> देश और विदेश का विशेष न्यूज</h3>
+                <p>विश्वसनीय, त्वरित और सटीक समाचारों का स्रोत। हमारा उद्देश्य निष्पक्ष और संतुलित पत्रकारिता के माध्यम से जनता तक सही जानकारी पहुँचाना है।</p>
             </div>
             
-            <!-- News Card 3 -->
-            <div class="news-card">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="News Image">
-                </div>
-                <div class="card-content">
-                    <span class="news-category">खेल</span>
-                    <h3>भारत ने जीता एशिया कप 2025, पाकिस्तान को 5 विकटों से हराया</h3>
-                    <p>कोलंबो में खेले गए फाइनल मुकाबले में भारतीय क्रिकेट टीम ने पाकिस्तान को 5 विकटों से हराकर एशिया कप पर कब्जा जमाया। विराट कोहली ने शानदार शतक जड़ा...</p>
-                    <div class="news-meta">
-                        <span><i class="far fa-clock"></i> 6 घंटे पहले</span>
-                        <span><i class="far fa-eye"></i> 4.7k</span>
-                    </div>
-                </div>
+            <div class="footer-links">
+                <h4>श्रेणियाँ</h4>
+                <ul>
+                    <li><a href="#politics"><i class="fas fa-arrow-right"></i> राजनीति</a></li>
+                    <li><a href="#sports"><i class="fas fa-arrow-right"></i> खेल</a></li>
+                    <li><a href="#entertainment"><i class="fas fa-arrow-right"></i> मनोरंजन</a></li>
+                    <li><a href="#business"><i class="fas fa-arrow-right"></i> व्यापार</a></li>
+                    <li><a href="#technology"><i class="fas fa-arrow-right"></i> तकनीक</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> अंतरराष्ट्रीय</a></li>
+                </ul>
             </div>
             
-            <!-- News Card 4 -->
-            <div class="news-card">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1588702547919-26089e270437?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="News Image">
-                </div>
-                <div class="card-content">
-                    <span class="news-category">व्यापार</span>
-                    <h3>रुपया अमेरिकी डॉलर के मुकाबले मजबूत, एक्सचेंज रेट 76.20 पर पहुंचा</h3>
-                    <p>विदेशी निवेश में बढ़ोतरी और निर्यात में वृद्धि के कारण भारतीय रुपया लगातार तीसरे दिन मजबूत हुआ है। विशेषज्ञों के अनुसार आने वाले दिनों में रुपया और मजबूत हो सकता है...</p>
-                    <div class="news-meta">
-                        <span><i class="far fa-clock"></i> 8 घंटे पहले</span>
-                        <span><i class="far fa-eye"></i> 1.8k</span>
-                    </div>
-                </div>
+            <div class="footer-links">
+                <h4>उपयोगी लिंक</h4>
+                <ul>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> हमारे बारे में</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> गोपनीयता नीति</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> उपयोग की शर्तें</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> विज्ञापन दें</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> करियर</a></li>
+                    <li><a href="#contact"><i class="fas fa-arrow-right"></i> संपर्क करें</a></li>
+                </ul>
             </div>
             
-            <!-- News Card 5 -->
-            <div class="news-card">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1593118247619-e2d6f056869e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="News Image">
-                </div>
-                <div class="card-content">
-                    <span class="news-category">दुनिया</span>
-                    <h3>यूरोप में भीषण गर्मी की लहर, तापमान ने तोड़ा 50 साल का रिकॉर्ड</h3>
-                    <p>यूरोपीय देशों में जारी भीषण गर्मी की लहर के कारण कई जगहों पर तापमान ने 45 डिग्री सेल्सियस को पार कर लिया है। स्पेन और पुर्तगाल में स्थिति सबसे गंभीर है...</p>
-                    <div class="news-meta">
-                        <spa
+            <div class="footer-links">
+                <h4>हमारे ऐप</h4>
+                <ul>
+                    <li><a href="#"><i class="fab fa-android"></i> Android ऐप</a></li>
+                    <li><a href="#"><i class="fab fa-apple"></i> iOS ऐप</a></li>
+                    <li><a href="#"><i class="fas fa-rss"></i> RSS फ़ीड</a></li>
+                    <li><a href="#"><i class="fab fa-google-play"></i> Google News</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2025 देश और विदेश का विशेष न्यूज। सर्वाधिकार सुरक्षित।</p>
+            <p>यह वेबसाइट स्वचालित रूप से प्रतिदिन अपडेट होती है | समाचारों का स्वचालित अनुवाद प्रणाली द्वारा किया जाता है</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Set current date
+        const event = new Date();
+        const options = { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        };
+        document.getElementById('current-date').textContent = event.toLocaleDateString('hi-IN', options);
+        
+        // Auto update notification
+        setInterval(() => {
+            const updateMsg = document.querySelector('.auto-update');
+            updateMsg.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> अगला अपडेट: ' + Math.floor(Math.random() * 10) + ' मिनट में';
+            
+            setTimeout(() => {
+                updateMsg.innerHTML = '<i class="fas fa-sync-alt"></i> यह वेबसाइट प्रतिदिन स्वचालित रूप से अपडेट होती है';
+            }, 5000);
+        }, 30000);
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
